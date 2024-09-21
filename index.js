@@ -33,7 +33,9 @@ app.use(cors({
     methods: ["post", "get"],
     credentials: true
 }));
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app.get('/', (req, res) => {
