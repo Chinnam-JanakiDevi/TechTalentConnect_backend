@@ -45,8 +45,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 //         res.send("Hi, server is running")
 //     }
 // })
-app.get('/', (req, res) => {
-    res.send("Hello")
+app.get("/", (req, res) => {
+    console.log("hello");
+    res.json("hello")
 })
 
 async function hashpass(password) {
