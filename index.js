@@ -29,7 +29,7 @@ db.once('open', () => {
 app.use(express.json())
 // app.use(cors());
 app.use(cors({
-    origin: ["https://techtalentconnectfrontend.vercel.app/"],
+    origin: ["https://techtalentconnectfrontend.vercel.app"],
     methods: ["post", "get"],
     credentials: true
 }));
@@ -73,7 +73,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post('/ProfReg', upload.fields([{ name: 'demoImages' }, { name: 'demoVideos' }]), async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { fullName, email, phone, password, skills, price, gender, about, state, district, city } = req.body;
@@ -115,7 +115,7 @@ app.post('/ProfReg', upload.fields([{ name: 'demoImages' }, { name: 'demoVideos'
 
 
 app.post('/userReg', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { name, email, phone_number, InterestedAreas, password } = req.body;
@@ -156,7 +156,7 @@ app.post('/userReg', async (req, res) => {
 
 
 app.post('/ulogin', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { email, password } = req.body;
@@ -183,7 +183,7 @@ app.post('/ulogin', async (req, res) => {
 });
 
 app.post('/Plogin', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { email, password } = req.body;
@@ -219,7 +219,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/book', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { handType, numberOfHands, address, startTime, endTime, userEmail, profEmail } = req.body;
@@ -291,7 +291,7 @@ app.post('/book', async (req, res) => {
 });
 
 app.get('/getNotifications/:email', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { email } = req.params;
@@ -321,7 +321,7 @@ const transporter1 = nodemailer.createTransport({
 
 // Accept Booking - send email with payment link
 app.post('/acceptBooking', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { userEmail } = req.body;
@@ -382,7 +382,7 @@ app.post('/acceptBooking', async (req, res) => {
 
 
 app.post('/rejectBooking', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { userEmail } = req.body; // Get userEmail from the request body
@@ -446,7 +446,7 @@ app.post('/rejectBooking', async (req, res) => {
 });
 
 app.get('/service/:name', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     try {
@@ -465,7 +465,7 @@ app.get('/service/:name', async (req, res) => {
 });
 
 app.post('/myworks', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     try {
@@ -491,7 +491,7 @@ app.post('/upload', upload1.fields([{ name: 'demoImages' }, { name: 'demoVideos'
 });
 
 app.get('/api/demovideos', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     try {
