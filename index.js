@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const multer = require('multer');
+// const multer = require('multer');
 const path = require('path');
 const jwt = require('jsonwebtoken')
 const cookie = require('cookie-parser')
@@ -66,55 +66,55 @@ async function compare(userpass, hashpass) {
 }
 
 
-const storage = multer.diskStorage({
-    destination: './uploads/',
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`);
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: './uploads/',
+//     filename: (req, file, cb) => {
+//         cb(null, `${Date.now()}_${file.originalname}`);
+//     }
+// });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
-app.post('/ProfReg', upload.fields([{ name: 'demoImages' }, { name: 'demoVideos' }]), async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    const { fullName, email, phone, password, skills, price, gender, about, state, district, city } = req.body;
+// app.post('/ProfReg', upload.fields([{ name: 'demoImages' }, { name: 'demoVideos' }]), async (req, res) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
+//     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//     const { fullName, email, phone, password, skills, price, gender, about, state, district, city } = req.body;
 
-    // Extract file names instead of full paths
-    const demoImages = req.files['demoImages'] ? req.files['demoImages'].map(file => path.basename(file.path)) : [];
-    const demoVideos = req.files['demoVideos'] ? req.files['demoVideos'].map(file => path.basename(file.path)) : [];
+//     // Extract file names instead of full paths
+//     const demoImages = req.files['demoImages'] ? req.files['demoImages'].map(file => path.basename(file.path)) : [];
+//     const demoVideos = req.files['demoVideos'] ? req.files['demoVideos'].map(file => path.basename(file.path)) : [];
 
-    try {
-        const check = await profReg.findOne({ email: email });
-        if (check) {
-            return res.status(400).send("User details already exist");
-        }
-        const data = {
-            fullName: fullName,
-            email: email,
-            phone: phone,
-            password: await hashpass(password), // Use the hashed password here
-            skills: skills,
-            price: price,
-            gender: gender,
-            state: state,
-            district: district,
-            city: city,
-            about: about,
-            demoImages: demoImages,
-            demoVideos: demoVideos
-        };
-        console.log(data);
-        // Create and save new user
-        const user = new profReg(data);
-        await user.save();
-        return res.status(201).send({ message: "registered successfully" });
-    } catch (error) {
-        console.error('Error during registration:', error);
-        res.status(500).send('Internal server error');
-    }
-});
+//     try {
+//         const check = await profReg.findOne({ email: email });
+//         if (check) {
+//             return res.status(400).send("User details already exist");
+//         }
+//         const data = {
+//             fullName: fullName,
+//             email: email,
+//             phone: phone,
+//             password: await hashpass(password), // Use the hashed password here
+//             skills: skills,
+//             price: price,
+//             gender: gender,
+//             state: state,
+//             district: district,
+//             city: city,
+//             about: about,
+//             demoImages: demoImages,
+//             demoVideos: demoVideos
+//         };
+//         console.log(data);
+//         // Create and save new user
+//         const user = new profReg(data);
+//         await user.save();
+//         return res.status(201).send({ message: "registered successfully" });
+//     } catch (error) {
+//         console.error('Error during registration:', error);
+//         res.status(500).send('Internal server error');
+//     }
+// });
 
 
 app.post('/userReg', async (req, res) => {
@@ -485,25 +485,25 @@ app.post('/myworks', async (req, res) => {
     }
 });
 
-const upload1 = multer({ dest: 'uploads/' });
-app.post('/upload', upload1.fields([{ name: 'demoImages' }, { name: 'demoVideos' }]), (req, res) => {
-    const files = req.files;
-    console.log(files);
-    // Save file info to the database and return response
-    res.send('Files uploaded');
-});
+// const upload1 = multer({ dest: 'uploads/' });
+// app.post('/upload', upload1.fields([{ name: 'demoImages' }, { name: 'demoVideos' }]), (req, res) => {
+//     const files = req.files;
+//     console.log(files);
+//     // Save file info to the database and return response
+//     res.send('Files uploaded');
+// });
 
-app.get('/api/demovideos', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    try {
-        const demoVideos = await profReg.find({}, 'demoVideos'); // Fetch only the demoVideos field for all records
-        res.status(200).json(demoVideos);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error', error });
-    }
-});
+// app.get('/api/demovideos', async (req, res) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app");
+//     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//     try {
+//         const demoVideos = await profReg.find({}, 'demoVideos'); // Fetch only the demoVideos field for all records
+//         res.status(200).json(demoVideos);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Server error', error });
+//     }
+// });
 
 app.listen(port, () => {
     console.log(`server is running at http://localhost:${port}`);
