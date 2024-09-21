@@ -27,18 +27,26 @@ db.once('open', () => {
 });
 
 app.use(express.json())
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: ["https://techtalentconnectfrontend.vercel.app/"],
+    methods: ["post", "get"],
+    credentials: true
+}));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// app.get('/', (req, res) => {
+//     // console.log("Hi, server is running ");
+//     if (res.cookie.jwt) {
+//         const verify = jwt.verify(req.cookies.jwt, "ThisisTechTalentConnectStartUp")
+//         res.send("email", verify.email)
+//     } else {
+//         res.send("Hi, server is running")
+//     }
+// })
 app.get('/', (req, res) => {
-    // console.log("Hi, server is running ");
-    if (res.cookie.jwt) {
-        const verify = jwt.verify(req.cookies.jwt, "ThisisTechTalentConnectStartUp")
-        res.send("email", verify.email)
-    } else {
-        res.send("Hi, server is running")
-    }
+    res.send("Hello")
 })
 
 async function hashpass(password) {
@@ -65,6 +73,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post('/ProfReg', upload.fields([{ name: 'demoImages' }, { name: 'demoVideos' }]), async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { fullName, email, phone, password, skills, price, gender, about, state, district, city } = req.body;
 
     // Extract file names instead of full paths
@@ -104,6 +115,9 @@ app.post('/ProfReg', upload.fields([{ name: 'demoImages' }, { name: 'demoVideos'
 
 
 app.post('/userReg', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { name, email, phone_number, InterestedAreas, password } = req.body;
     console.log(name, email, phone_number, InterestedAreas, password);
 
@@ -142,6 +156,9 @@ app.post('/userReg', async (req, res) => {
 
 
 app.post('/ulogin', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { email, password } = req.body;
 
     try {
@@ -166,6 +183,9 @@ app.post('/ulogin', async (req, res) => {
 });
 
 app.post('/Plogin', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { email, password } = req.body;
 
     try {
@@ -199,6 +219,9 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/book', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { handType, numberOfHands, address, startTime, endTime, userEmail, profEmail } = req.body;
 
     if (!handType || !numberOfHands || !address || !startTime || !endTime || !userEmail) {
@@ -268,6 +291,9 @@ app.post('/book', async (req, res) => {
 });
 
 app.get('/getNotifications/:email', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { email } = req.params;
     console.log(email);  // Make sure email is coming correctly from the frontend
     try {
@@ -295,6 +321,9 @@ const transporter1 = nodemailer.createTransport({
 
 // Accept Booking - send email with payment link
 app.post('/acceptBooking', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { userEmail } = req.body;
     console.log("User email:", userEmail);
 
@@ -353,6 +382,9 @@ app.post('/acceptBooking', async (req, res) => {
 
 
 app.post('/rejectBooking', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     const { userEmail } = req.body; // Get userEmail from the request body
 
     if (!userEmail) {
@@ -414,6 +446,9 @@ app.post('/rejectBooking', async (req, res) => {
 });
 
 app.get('/service/:name', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     try {
         const serviceName = req.params.name;
         console.log(serviceName);
@@ -430,6 +465,9 @@ app.get('/service/:name', async (req, res) => {
 });
 
 app.post('/myworks', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     try {
         const { profEmail } = req.body; // Get the profEmail from the query parameters
         const prof = await profReg.findOne({ email: profEmail });
@@ -453,6 +491,9 @@ app.post('/upload', upload1.fields([{ name: 'demoImages' }, { name: 'demoVideos'
 });
 
 app.get('/api/demovideos', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://techtalentconnectfrontend.vercel.app/");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     try {
         const demoVideos = await profReg.find({}, 'demoVideos'); // Fetch only the demoVideos field for all records
         res.status(200).json(demoVideos);
